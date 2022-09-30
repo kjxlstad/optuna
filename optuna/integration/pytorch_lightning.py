@@ -58,7 +58,7 @@ class PyTorchLightningPruningCallback(Callback):
 
     def on_init_start(self, trainer: Trainer) -> None:
         self.is_ddp_backend = (
-            trainer._accelerator_connector.distributed_backend is not None  # type: ignore
+            trainer._accelerator_connector.is_distributed
         )
         if self.is_ddp_backend:
             if version.parse(pl.__version__) < version.parse("1.5.0"):
